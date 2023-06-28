@@ -1,0 +1,382 @@
+\documentclass[12pt, letterpaper]{article}
+
+\usepackage[letterpaper,left=0.7in,right=0.7in,top=\dimexpr15mm+1.5\baselineskip,bottom=0.7in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{pxfonts}
+\usepackage[]{newpxtext}
+\usepackage[varg,vvarbb]{newpxmath}
+\usepackage{inconsolata}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{anyfontsize}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{propt}{Proposition}
+\newtheorem{eg}{Example}
+\newtheorem{soln}{Solution}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{prop}[1]{%
+    \vspace*{0.2in}
+    \linebreak
+    \begin{minipage}{\linewidth}
+    \rule{\textwidth}{2pt}
+        \begin{propt}
+}
+{%
+        \end{propt}
+    \rule{\textwidth}{2pt}
+    \end{minipage}
+    \vspace*{0.2in}
+    \linebreak
+}
+
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[table]{xcolor}
+
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily, % Default font
+    numbers=left,              % Location of line numbers
+    % numberstyle=\tiny,          % Style of line numbers
+    % stepnumber=2,              % Margin between line numbers
+    numbersep=5pt,              % Margin between line numbers and text
+    tabsize=2,                  % Size of tabs
+    extendedchars=true,
+    breaklines=true,            % Lines will be wrapped
+    keywordstyle=\color{red},
+    frame=b,
+    % keywordstyle=[1]\textbf,
+    % keywordstyle=[2]\textbf,
+    % keywordstyle=[3]\textbf,
+    % keywordstyle=[4]\textbf,   \sqrt{\sqrt{}}
+    stringstyle=\color{white}\ttfamily, % Color of strings
+    showspaces=false,
+    showtabs=false,
+    xleftmargin=17pt,
+    %framexbottommargin=0.2in
+    framexleftmargin=17pt,
+    framexrightmargin=5pt,
+    framexbottommargin=4pt,
+    % backgroundcolor=\color{lightgray},
+    showstringspaces=false
+}
+%\lstloadlanguages{ % Check documentation for further languages ...
+     % [Visual]Basic,
+     % Pascal,
+     % C,
+     % C++,
+     % XML,
+     % HTML,
+     %Java
+%}
+% \DeclareCaptionFont{blue}{\color{blue}} 
+
+% \captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.7, 0.7, 0.7,0.01}{\parbox{0.98\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{
+    format=listing, 
+    labelfont=white, 
+    labelformat=empty,
+    textfont=white, 
+    singlelinecheck=false, 
+    %margin=0pt, 
+    font={bf}
+    }
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancyplain}
+\fancyhf{}
+\lhead[Discrete Structures]{Discrete Structures}
+\chead[Lecture 1 Notes]{Lecture 1 Notes}
+%\rhead[\today]{\today}
+
+\newcommand{\gap}[1][0.3in]{
+    \vspace*{#1}
+    \noindent\noindent
+}
+
+\newcommand{\septext}[1][or]{
+    \qquad \text{#1} \qquad
+}
+
+\newcommand{\septextor}[0]{
+    \septext
+}
+
+\newcommand{\septextand}[0]{
+    \septext[and]
+}
+
+\newcommand{\separrow}[0]{
+    \qquad \Rightarrow \qquad
+}
+
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+%\usepgfplotslibrary{polar}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage[export]{adjustbox}
+
+\DeclareMathOperator{\arcsinh}{arcsinh}
+
+\linespread{1.2}
+
+\definecolor{MBlue}{RGB}{0, 80, 180}
+
+\begin{document}
+\subsection*{Warm-up}
+
+\vspace*{1in}\noindent
+What is the greatest number you can express in 10 seconds?
+
+\vspace*{0.4in}\noindent
+You may only use numerical digits and mathematical operations, not references
+or indirection; \emph{e.g.}, you may not write something like, "the largest
+number written by anyone else in the room +1."
+
+\clearpage\pagebreak
+\subsection*{Warm-up}
+
+\vspace*{1in}\noindent
+How is Computer Science different from Software Development?
+
+\clearpage\pagebreak
+\subsection*{Structures: Discrete and Continuous}
+
+In this class we will discuss, not surprisingly, discrete structures, but
+what are discrete structures? First, let's get out of the way the idea of a
+\emph{set}. Without giving it too much thought, we start with the following:
+
+\begin{defn}
+    A set is an unordered collection of unique \emph{elements}.
+\end{defn}
+\noindent We will denote the contents of a set using curly braces, $\{\}$.
+So for instance, the following are sets:
+
+\begin{itemize}[label={}]
+    \item $\left\{ A, B, C \right\}$
+    \item The real numbers, $\mathbb{R}$
+    \item $\left\{ \text{Tim}, \text{an elm tree}, \mathbb{R} \right\}$
+    \item $\left\{ 0.4x \, | \, x \, \text{is an odd, positive integer} \right\} = \left\{ 0.41, 0.43, 0.45, \dots \right\}$
+\end{itemize}
+
+The last example is given in \emph{set builder notation}, which we will make
+copious use of through the course. The idea is to give the elements of the set
+in terms of variables, then to give the constraints of the variables.
+
+Notice that the first and third examples have a finite number of elements.
+The number of elements of a set are called its \emph{cardinality}, so that
+the first set has a cardinality of 3, where we would write
+\begin{equation*}
+    \left|\left\{ A, B, C \right\}\right| = 3.
+\end{equation*}
+The second and fourth examples have infinite cardinality.
+
+It is also a good time to mention that if $S$ is a set, and $X$ is another set
+that contains elements from the set $S$, then $X$ is a subset of $S$, written
+$X \subset S$. We have
+
+\begin{itemize}[label={}]
+    \item $\left\{ A, B \right\} \subset \left\{ A, B, C \right\}$
+    \item $\mathbb{Q} \subset \mathbb{R}$
+    \item $S \subset S$ for any set $S$
+    \item $\varnothing \subset S$ for any set $S$
+\end{itemize}
+
+We are now more or less in a position to say that discrete structures are those
+that are representable either by a finite set, or an infinite set that can be
+put into correspondence with the natural (counting) numbers (more about that in
+an upcoming lecture).
+
+Practically speaking, we can count the elements of a discrete structure, where
+we cannot do so with a non-discrete structure. The real numbers, $\mathbb{R}$,
+are an example of a continuous structure, which is certainly not discrete
+(again, more on that soon).
+
+\clearpage\pagebreak\noindent
+\subsection*{Counting: The Sum Principle}
+\noindent
+\textbf{Example 1}
+How many times is the comparison $A[i] > A[j]$ made in Line 3 below?
+
+\begin{center}
+    \begin{lstlisting}[label=ex1a, caption={Example 1}]
+    for i = 1 to n-1
+        for j = i+1 to n
+            if (A[i] > A[j])
+                swap A[i] and A[j]
+    \end{lstlisting}
+\end{center}
+
+\clearpage\pagebreak\noindent
+\subsection*{Counting: The Sum Principle}
+\noindent
+\textbf{Example 1}
+How many times is the comparison $A[i] > A[j]$ made in Line 3 below?
+
+\begin{center}
+    \begin{lstlisting}[label=ex1b, caption={Example 1}]
+    for i = 1 to n-1
+        for j = i+1 to n
+            if (A[i] > A[j])
+                swap A[i] and A[j]
+    \end{lstlisting}
+\end{center}
+
+
+\noindent
+The solutions is quite simple. The first time through the inner loop, we perform
+$n-1$ comparisons. The second time through, we perform $n-2$ comparisons. The
+$i$th time, we perform $n-i$ comparisons. So we get
+\begin{equation*}
+    (n-1) + (n-2) + \cdots + 1 = \frac{n(n-1)}{2}
+\end{equation*}
+total comparisons, where we will prove this formula later.
+
+The solution to this problem isn't nearly so useful as the reasoning that leads
+to it. For each $i$, let $S_{i}$ be the set of comparisons made for that value
+of $i$. So $S_{1}$ contains the comparisons made when $i=1$, $S_{2}$ contains
+the comparisons made when $i=2$, and so on. Then it is important to note that
+\begin{equation*}
+    S_{a} \cap S_{b} = \varnothing
+\end{equation*}
+whenever $a \neq b$; \emph{i.e.} the sets $S_{i}$ are \emph{disjoint}. If we
+let $S$ be the set of all comparisons made for the entire code block, then
+\begin{equation*}
+    S = S_{1} \cup S_{2} \cup \cdots \cup S_{n-1} = \bigcup_{i=1}^{n-1}S_{i}
+\end{equation*}
+and the cardinality of $S$ is given by
+\begin{equation*}
+    |S| = |S_{1} \cup S_{2} \cup \cdots \cup S_{n-1}| = |S_{1}| + |S_{2}| + \cdots + |S_{n-1}|.
+\end{equation*}
+This is important enough to note as a \emph{proposition}, \emph{i.e.}, a
+useful, light-weight theorem:
+\begin{prop}
+    \textbf{(Sum Principle)}
+    The size of a union of a family of mutually disjoint finite sets is the
+    sum of the sizes of the sets.
+\end{prop}
+We will prove this after a discussion on the principle of induction.
+We can also restate this proposition by making a useful definition.
+
+If we can write the set $S$ as the union of a family of non-empty, disjoint
+sets, $\mathcal{S} = \left\{ S_{1}, ... , S_{n} \right\}$, then we say that
+$\mathcal{S}$ \emph{partitions} $S$ and that the \emph{partition} $\mathcal{S}$
+is comprised of \emph{blocks} $S_{1}, ... , S_{n}$. We have
+\begin{prop}
+    \textbf{(Sum Principle - Partition Form)}
+    If a finite set $S$ has been partitioned into blocks, then the cardinality of $S$ is
+    the sum of the cardinality of the blocks.
+\end{prop}
+
+\clearpage\pagebreak\noindent
+\subsection*{Counting: The Product Principle}
+\noindent
+\textbf{Example 2}
+How many multiplications (expressed in terms of r, m, and n) does this
+pseudocode carry out in total among all the iterations of Line 5?
+
+\begin{center}
+    \begin{lstlisting}[label=ex2a, caption={Example 2}]
+    for i = 1 to r
+        for j = 1 to m
+            S = 0
+            for k = 1 to n
+                S = S + A[i,k] * B[k,j]
+            C[i,j] = S
+\end{lstlisting}
+\end{center}
+
+\clearpage\pagebreak\noindent
+\subsection*{Counting: The Product Principle}
+\noindent
+\textbf{Example 2}
+How many multiplications (expressed in terms of r, m, and n) does this
+pseudocode carry out in total among all the iterations of Line 5?
+
+\begin{center}
+    \begin{lstlisting}[label=ex2b, caption={Example 2}]
+    for i = 1 to r
+        for j = 1 to m
+            S = 0
+            for k = 1 to n
+                S = S + A[i,k] * B[k,j]
+            C[i,j] = S
+\end{lstlisting}
+\end{center}
+
+\noindent
+Counting explicitly, we see that the loop in Lines 4-5 always executes $n$
+times, giving $n$ multiplications. The loop in Lines 2-5 executes $m$ times,
+so that everytime it runs, we get $nm$ multiplications. Finally, the outer
+loop, from Lines 1-5, executes $r$ times, each time performing $nm$
+multiplications, for a total of $nmr$ multiplications.
+
+Again, the actual solution isn't as important as the reasoning used to obtain
+it. Why did we end up multiplying in this example instead of adding, as we did
+in the Example 1?
+
+Let's walk through this example as we did before. For each $j$, let $S_{j}$
+be the set of multiplications performed. We get $|S_{j}| = n$ for every $j$.
+Now let $T_{i}$ be the set of all multiplications performed for each index $i$.
+Then $T_{i}$ is the union of the sets $S_{j}$.
+Using the Sum Principle, we get
+\begin{equation*}
+    |T_{i}| = \left| \bigcup_{j=1}^{m}S_{j} \right| = \sum_{j=1}^{m}|S_{j}| = \sum_{j=1}^{m}n = mn.
+\end{equation*}
+We now have a new proposition that acts as a shortcut under certain conditions
+for the Sum Principle:
+\begin{prop}
+    \textbf{(Product Principle)}
+    The cardinality of a union of a family of mutually disjoint finite sets is the
+    sum of the cardinalities of the sets.
+\end{prop}
+The proof is the same as our reasoning above.
+
+\clearpage\pagebreak
+As it happens, we could have counted the comparisons from Example 1 using the
+Product Principle as well. Notice that for each unique pair, $i$ and $j$, in
+Example 1, we make exactly one comparison. So we have that the number of
+comparisons is the same as the number of unique pairs, which, in turn, is the
+same as the number of two-element subsets of the set
+$\left\{ 1, 2, ..., n \right\}$. We will discuss this later, but this is an
+example of a \emph{bijection}. We now want to answer the question, in how many
+ways can we choose two elements from this set?
+
+It should be relatively clear that there are $n$ different ways to choose the
+first element. Once that element is chosen, it is gone, and we have $n-1$
+elements remaining for our second choice. You might think that the Product
+Principle tells us that there are $n(n-1)$ ways to choose two elements from
+$\left\{ 1, 2, ..., n \right\}$; however, what we have chosen are
+\emph{ordered pairs}. Sets are \emph{unordered} (go back and check the
+definition) so that choosing 2 then 5 is the same as choosing 5 then 2.
+Therefore $n(n-1)$ gives us twice as many pairs as we need, and the correct
+result is given by $\frac{n(n-1)}{2}$.
+
+This value comes up so often that it has its own name and notation.
+When we choose $k$ unordered items from a set of cardinality $n$, we call it
+"$n$ choose $k$" and write $\binom{n}{k}$. We have shown that
+\begin{equation*}
+    \binom{n}{k} = \frac{n(n-1)}{2}.
+\end{equation*}
+We will derive a formula for arbitrary intergers $n$ and $k$ with $n \ge k$
+later.
+
+
+
+
+
+\end{document}
