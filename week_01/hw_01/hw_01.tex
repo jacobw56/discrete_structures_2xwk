@@ -1,0 +1,191 @@
+\documentclass[12pt, letterpaper]{article}
+
+\usepackage[letterpaper,left=0.7in,right=0.7in,top=\dimexpr15mm+1.5\baselineskip,bottom=0.7in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{pxfonts}
+\usepackage[]{newpxtext}
+\usepackage[varg,vvarbb]{newpxmath}
+\usepackage{inconsolata}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{anyfontsize}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{propt}{Proposition}
+\newtheorem{eg}{Example}
+\newtheorem{soln}{Solution}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{prop}[1]{%
+    \vspace*{0.2in}
+    \linebreak
+    \begin{minipage}{\linewidth}
+    \rule{\textwidth}{2pt}
+        \begin{propt}
+}
+{%
+        \end{propt}
+    \rule{\textwidth}{2pt}
+    \end{minipage}
+    \vspace*{0.2in}
+    \linebreak
+}
+
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[table]{xcolor}
+
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily, % Default font
+    numbers=left,              % Location of line numbers
+    % numberstyle=\tiny,          % Style of line numbers
+    % stepnumber=2,              % Margin between line numbers
+    numbersep=5pt,              % Margin between line numbers and text
+    tabsize=2,                  % Size of tabs
+    extendedchars=true,
+    breaklines=true,            % Lines will be wrapped
+    keywordstyle=\color{red},
+    frame=b,
+    % keywordstyle=[1]\textbf,
+    % keywordstyle=[2]\textbf,
+    % keywordstyle=[3]\textbf,
+    % keywordstyle=[4]\textbf,   \sqrt{\sqrt{}}
+    stringstyle=\color{white}\ttfamily, % Color of strings
+    showspaces=false,
+    showtabs=false,
+    xleftmargin=17pt,
+    %framexbottommargin=0.2in
+    framexleftmargin=17pt,
+    framexrightmargin=5pt,
+    framexbottommargin=4pt,
+    % backgroundcolor=\color{lightgray},
+    showstringspaces=false
+}
+%\lstloadlanguages{ % Check documentation for further languages ...
+     % [Visual]Basic,
+     % Pascal,
+     % C,
+     % C++,
+     % XML,
+     % HTML,
+     %Java
+%}
+% \DeclareCaptionFont{blue}{\color{blue}} 
+
+% \captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.7, 0.7, 0.7,0.01}{\parbox{0.98\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{
+    format=listing, 
+    labelfont=white, 
+    labelformat=empty,
+    textfont=white, 
+    singlelinecheck=false, 
+    %margin=0pt, 
+    font={bf}
+    }
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancyplain}
+\fancyhf{}
+\lhead[Discrete Structures]{Discrete Structures}
+\chead[Homework 1]{Homework 1}
+%\rhead[\today]{\today}
+
+\newcommand{\gap}[1][0.3in]{
+    \vspace*{#1}
+    \noindent\noindent
+}
+
+\newcommand{\septext}[1][or]{
+    \qquad \text{#1} \qquad
+}
+
+\newcommand{\septextor}[0]{
+    \septext
+}
+
+\newcommand{\septextand}[0]{
+    \septext[and]
+}
+
+\newcommand{\separrow}[0]{
+    \qquad \Rightarrow \qquad
+}
+
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+%\usepgfplotslibrary{polar}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage[export]{adjustbox}
+
+\DeclareMathOperator{\arcsinh}{arcsinh}
+
+\linespread{1.2}
+
+\definecolor{MBlue}{RGB}{0, 80, 180}
+
+\begin{document}
+\subsection*{Counting: The Sum and Product Principles}
+
+\vspace*{0.3in}\noindent
+\textbf{1.} Consider the following code.
+\begin{center}
+    \begin{lstlisting}[label=p1, caption={Problem 1 Code}, escapeinside={(*}{*)}]
+    for i = 2 to n
+        j = i
+        while (j (*$\geq$*) 2)(A[j] < A[j-1])
+            swap A[j] and A[j-1]
+            j = j-1
+    \end{lstlisting}
+\end{center}
+What is the maximum number of times (considering all lists of $n$ items that
+you could be asked to sort) the program makes the comparison $A[j] < A[j - 1]$?
+Describe as succinctly as you can those lists that require this number of
+comparisons.
+
+\vspace*{0.3in}\noindent
+\textbf{2.} Five schools are going to send their badminton teams to a tournament
+in which each team must play each other team exactly once. How many games are
+required?
+
+\vspace*{0.3in}\noindent
+\textbf{3.} In how many ways can a 10-person club select a president and a
+secretary-treasurer from among its members (assuming that a member cannot fill
+both positions)?
+
+\vspace*{0.3in}\noindent
+\textbf{4.} In how many ways can a 10-person club select a two-person executive
+committee from among its members?
+
+\vspace*{0.3in}\noindent
+\textbf{5.} In how many ways can a 10-person club select a president and a
+two-person executive advisory board from among its members (assuming that the
+president is not on the advisory board)?
+
+\vspace*{0.3in}\noindent
+\textbf{6.} Using the formula for $\binom{n}{2}$, it is straightforward to show
+that
+\begin{equation*}
+    n\binom{n-1}{2} = \binom{n}{2}(n-2).
+\end{equation*}
+However, this proof simply uses blind substitution and simplification.
+Find a more conceptual explanation of why this formula is true.
+(Hint: Think in terms of officers and committees in a club.)
+
+
+
+
+
+\end{document}
