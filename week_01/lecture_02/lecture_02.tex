@@ -1,0 +1,394 @@
+\documentclass[12pt, letterpaper]{article}
+
+\usepackage[letterpaper,left=0.7in,right=0.7in,top=\dimexpr15mm+1.5\baselineskip,bottom=0.7in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{pxfonts}
+\usepackage[]{newpxtext}
+\usepackage[varg,vvarbb]{newpxmath}
+\usepackage{inconsolata}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{anyfontsize}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{propt}{Proposition}
+\newtheorem{eg}{Example}
+\newtheorem{soln}{Solution}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{prop}[1]{%
+    \vspace*{0.2in}
+    ~\newline\noindent
+    \begin{minipage}{\linewidth}
+    \rule{\textwidth}{2pt}
+        \begin{propt}
+}
+{%
+        \end{propt}
+    \rule{\textwidth}{2pt}
+    \end{minipage}
+    \vspace*{0.2in}
+    \linebreak
+}
+
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[table]{xcolor}
+
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily, % Default font
+    numbers=left,              % Location of line numbers
+    % numberstyle=\tiny,          % Style of line numbers
+    % stepnumber=2,              % Margin between line numbers
+    numbersep=5pt,              % Margin between line numbers and text
+    tabsize=2,                  % Size of tabs
+    extendedchars=true,
+    breaklines=true,            % Lines will be wrapped
+    keywordstyle=\color{red},
+    frame=b,
+    % keywordstyle=[1]\textbf,
+    % keywordstyle=[2]\textbf,
+    % keywordstyle=[3]\textbf,
+    % keywordstyle=[4]\textbf,   \sqrt{\sqrt{}}
+    stringstyle=\color{white}\ttfamily, % Color of strings
+    showspaces=false,
+    showtabs=false,
+    xleftmargin=17pt,
+    %framexbottommargin=0.2in
+    framexleftmargin=17pt,
+    framexrightmargin=5pt,
+    framexbottommargin=4pt,
+    % backgroundcolor=\color{lightgray},
+    showstringspaces=false
+}
+%\lstloadlanguages{ % Check documentation for further languages ...
+     % [Visual]Basic,
+     % Pascal,
+     % C,
+     % C++,
+     % XML,
+     % HTML,
+     %Java
+%}
+% \DeclareCaptionFont{blue}{\color{blue}} 
+
+% \captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.7, 0.7, 0.7,0.01}{\parbox{0.98\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{
+    format=listing, 
+    labelfont=white, 
+    labelformat=empty,
+    textfont=white, 
+    singlelinecheck=false, 
+    %margin=0pt, 
+    font={bf}
+    }
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancyplain}
+\fancyhf{}
+\lhead[Discrete Structures]{Discrete Structures}
+\chead[Lecture 1 Notes]{Lecture 1 Notes}
+%\rhead[\today]{\today}
+
+\newcommand{\gap}[1][0.3in]{
+    \vspace*{#1}
+    \noindent\noindent
+}
+
+\newcommand{\septext}[1][or]{
+    \qquad \text{#1} \qquad
+}
+
+\newcommand{\septextor}[0]{
+    \septext
+}
+
+\newcommand{\septextand}[0]{
+    \septext[and]
+}
+
+\newcommand{\separrow}[0]{
+    \qquad \Rightarrow \qquad
+}
+
+\newcommand{\fallingfactorial}[1]{%
+  ^{\mspace{2mu}\underline{\mspace{-2mu}#1\mspace{-2mu}}\mspace{2mu}}%
+}
+
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+%\usepgfplotslibrary{polar}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage[export]{adjustbox}
+
+\usepackage{tikzsymbols}
+
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\Ima}{Im}
+
+\linespread{1.2}
+
+\definecolor{MBlue}{RGB}{0, 80, 180}
+
+\begin{document}
+\subsection*{Warm-up}
+
+\vspace*{1in}\noindent
+In how many ways can you draw a first card and then a second card from a deck
+of 52 cards if you \emph{do not} put the drawn cards back into the deck?
+
+\vspace*{0.4in}\noindent
+In how many ways can you draw a first card and then a second card from a deck
+of 52 cards if you \emph{do} put the drawn cards back into the deck?
+
+\clearpage\pagebreak\noindent
+\subsection*{Lists, Permutations, Subsets}
+
+\noindent
+\textbf{Example 1.}
+A password for a certain computer system is supposed to be between four
+and eight characters long and composed of lowercase and/or uppercase
+letters, and the digits 0-9. How many passwords are possible? What counting
+principles did you use? Estimate the percentage of the possible passwords that
+have exactly four letters.
+
+
+\clearpage\pagebreak\noindent
+\subsection*{Lists, Permutations, Subsets}
+
+\noindent
+\textbf{Example 1.}
+A password for a certain computer system is supposed to be between four
+and eight characters long and composed of lowercase and/or uppercase
+letters, and the digits 0-9. How many passwords are possible? What counting
+principles did you use? Estimate the percentage of the possible passwords that
+have exactly four letters.
+
+\vspace*{0.2in}\noindent
+First, let's consider whether we can or should use either the Sum or the
+Product Principle. We know that we can make a password containing four, five,
+six, seven, or eight characters. Let $P_{i}$ for
+$i \in \left\{ 4, 5, 6, 7, 8 \right\}$ be the set of all passwords with $i$
+characters. Then for $i \neq j$, we have that $P_{i}$ and $P_{j}$ are
+disjoint, and if $P$ is the set of all passwords that satisfy the problem, then
+by the Sum Principle we have
+\begin{equation*}
+    |P| = \left|\bigcup_{i=4}^{8}P_{i}\right| = \sum_{i=4}^{8}|P_{i}|.
+\end{equation*}
+We now need to find $|P_{i}|$. For an $i$-character password, there are
+26 choices of both lower and uppercase letters, and ten digits, for a total
+of 62 choices of character. By the Product Principle, we have
+$|P_{i}| = 62^{i}$. Therefore the total number of passwords is given by
+\begin{equation*}
+    |P| = \sum_{i=4}^{8}|P_{i}| = 62^4 + 62^5 + 62^6 + 62^7 + 62^8 = 221,919,451,335,856.
+\end{equation*}
+Of these, $62^4$ of them contain four characters, so the percentage of passwords
+with four characters is given by
+\begin{equation*}
+    \frac{62^4}{62^4 + 62^5 + 62^6 + 62^7 + 62^8} \times 100 \approx 0.0000067 \%
+\end{equation*}
+Suppose that a computer can test one password every microsecond. Then it would
+take
+\begin{equation*}
+    62^4 * 0.000001 \approx 14.78 s
+\end{equation*}
+to test every four-character password, but it would take
+\begin{equation*}
+    62^8 * 0.000001 \approx 218,340,105.58 s
+\end{equation*}
+to test every eight-character password, or around 7 years!
+If we allowed passwords of 20 characters, then it would take this computer about
+22 sextillion years ($22 \times 10^{22}$) to try every 20-character password!
+For reference, the best science estimates the age of the univserse to be about
+13 billion years, some 12 orders of magnitude difference!
+Lesson: use longer passwords!
+
+\clearpage\pagebreak\noindent
+Notice that we used the Product Principle without writing a union of sets of
+equal size. We could have, but it would have been a little clumsy-looking.
+Instead we can use the following, second version of the Product Principle,
+which is easily derived using mathematical induction, which we will discuss
+in detail in a couple of weeks.
+\begin{prop}
+    \textbf{(Product Principle - Version 2)}
+    If $S$ is a set of lists of length $m$ having the properties
+    \begin{enumerate}
+        \item there are $i_{1}$ different first elements of lists in $S$, and
+        \item for each $k>1$ and each choice of the first $k-1$ elements of a
+              list in $S$, there are $i_{k}$ choices of elements in position $k$ of
+              those lists,
+    \end{enumerate}
+    then there are
+    \begin{equation*}
+        \prod_{k=1}^{m}i_{k} = i_{1} i_{2} i_{3} \cdots i_{m}
+    \end{equation*}
+    lists in $S$.
+\end{prop}
+Let's apply this version of the product principle to compute the number
+of $m$-character passwords. Because an $m$-character password is simply a list
+of $m$ characters and because there are 62 different first elements of the
+password and 62 choices for each other position of the password, we have
+that $i_{1} = 62$, $i_{2} = 62$, $\dots$ , $i_{m} = 62$. Thus, this version of
+the Product Principle tells us immediately that the number of passwords of
+length $m$ is
+\begin{equation*}
+    \prod_{k=1}^{m}i_{k} = i_{1} i_{2} i_{3} \cdots i_{m} = 62^{m}.
+\end{equation*}
+
+\clearpage\pagebreak\noindent
+We very conveniently used the word \emph{list} above without ever defining it.
+Let's clear this up now, but first we will define a function and some
+associated terms so that our definition will be precise.
+
+A \emph{function}, $f$, from a set $S$ to a set $T$, written
+\begin{equation*}
+    f : S \to T
+\end{equation*}
+is a mapping that associates exactly one element of $T$ to each element of $S$.
+The set $S$ is called the \emph{domain} of $f$ and the set $T$ is called its
+\emph{range} or \emph{codomain}. We often use the notation $f(x)$ so indicate
+that the function $f$ is acting on some element $x \in S$. Sometimes we refer
+to this mapping, emphasizing that it is associating an element $x \in S$ to
+and element $y \in T$ using the notation
+\begin{equation*}
+    x \mapsto y
+\end{equation*}
+It is often handy to know that the \emph{image} of a function $f : S \to T$,
+denoted $\Ima f$, is the set of all values $f(x)$ for $x \in S$, \emph{i.e.},
+\begin{equation*}
+    \Ima f = \left\{ f(x) \;|\; x \in S \right\}.
+\end{equation*}
+
+In this course we often explore functions over finite sets, in which case
+it is sometimes possible to simply explicitly list every association between
+our domain and codomain; \emph{e.g.}
+\begin{eqnarray}
+    f(\alpha) = \text{Tim}, f(\beta) = \text{\LARGE\WorstTree}, f(\gamma) = 7
+\end{eqnarray}
+defines a function
+\begin{equation*}
+    f : \left\{ \alpha, \beta, \gamma \right\} \to \left\{ \text{Tim}, \text{\LARGE\WorstTree}, 7 \right\}.
+\end{equation*}
+We could also write the function as a set of \emph{ordered pairs}; \emph{i.e.},
+\begin{equation*}
+    \left\{ \left(\alpha, \text{Tim}\right), \left( \beta, \text{\LARGE\WorstTree} \right), \left( \gamma, 7 \right) \right\}.
+\end{equation*}
+Now we can give a precise definition of a \emph{list}.
+
+A \emph{list} of $k$ elements from a set $T$ is a function
+\begin{equation*}
+    \left\{ 1, 2, \dots, k \right\} \to T.
+\end{equation*}
+
+\vspace*{0.1in}\noindent
+\textbf{Example 2.}
+How many functions are there from a two-element set to a three-element set?
+How many functions are there from a three-element set to a two-element set?
+
+
+\clearpage\pagebreak\noindent
+A function $f$ is \emph{one-to-one}, or \emph{injective}, or an \emph{injection},
+if $f(x) \neq f(y)$ when $x \neq y$. In symbols, $f$ is an \emph{injection} if
+\begin{equation*}
+    x \neq y \quad\Rightarrow\quad f(x) \neq f(y).
+\end{equation*}
+Note that this is equivalent to
+\begin{equation*}
+    f(x) = f(y) \quad\Rightarrow\quad x = y
+\end{equation*}
+by \emph{contraposition}, the veracity of which is proved by \emph{modus tollens}
+or \emph{DeMorgan's laws}. Note also that a function is injective if and only if
+it passes the horizontal line test.
+
+A function, $f : S \to T$ is called onto, or \emph{surjective}, or a \emph{surjection},
+if for all $y \in T$ there is an $x \in S$ such that $f(x) = y$. Note that,
+for example, $x \mapsto x^2$ is not surjective as a function
+$\mathbb{R} \to \mathbb{R}$, but it is a surjection as a function
+$\mathbb{R} \to [ 0, \infty )$. Indeed, every function is a surjection onto
+its image; \emph{i.e.},
+\begin{equation*}
+    f : S \to \Ima f
+\end{equation*}
+is always surjective.
+
+A function that is both injective and surjective is called \emph{bijective},
+or is a \emph{bijection}, or a \emph{one-to-one correspondence}. A bijection
+from a set to itself is called a \emph{permutation}. We also have the
+\emph{Bijection Principle}:
+\begin{prop}
+    \textbf{(Bijection Principle)}
+    If $f : S \to T$ is a bijection, then $|S| = |T|$.
+\end{prop}
+
+
+\vspace*{0.2in}\noindent
+\textbf{Example 3.}
+Using two- or three-element sets as domains and ranges, find an example
+of a one-to-one function that is not onto.
+Using two- or three-element sets as domains and ranges, find an example
+of an onto function that is not one-to-one.
+
+\clearpage\pagebreak\noindent
+\textbf{Example 4.}
+Among all iterations of line 5 of the pseudocode, what is the total number
+of times this line checks three points to see if they are collinear?
+
+\begin{center}
+    \begin{lstlisting}[label=ex4, caption={Example 4 Code}]
+    trianglecount = 0
+    for i = 1 to n-1
+        for j = i+1 to n
+            for k = j+1 to n
+                if i, j, and k are not collinear
+                    trianglecount += 1
+    \end{lstlisting}
+\end{center}
+
+Note that, since $i < j < k$, the code examines each such increasing triple
+$(i, j, k)$ exactly once. If $n = 4$, then we would count the increasing triples
+$(1,2,3)$, $(1,2,4)$, $(1,3,4)$, and $(2,3,4)$. We could count all such triples,
+but note instead that this is precisely the same as the number of 3-element
+subsets of $\left\{ 1, 2, \dots, n \right\}$. Because of the Bijection Principle,
+we can count such subsets instead to find \texttt{trianglecount}.
+
+Since sets do not have repeating elements, if we want to choose $k$ elements
+from a set of cardinality $n$, with $k \leq n$, then we have $n$ choices
+for the first element, $n-1$ for the second, up to $n-k+1$ choices for the
+$k$th element. This value, called the $k$th \emph{falling factorial power of n}
+is important enough that Donald E. Knuth (a name you ought to learn now)
+suggested it have its own symbol, $n \fallingfactorial{k}$. We have
+\begin{equation*}
+    n\fallingfactorial{k} = \prod_{i=0}^{k-1}(n-i) = n(n-1)\cdots(n-k+1) = \frac{n!}{(n-k)!}.
+\end{equation*}
+
+We still have a problem! The subsets we have generated have repeats!
+For instance, if $n=4$ using the above logic to choose 3-element subsets would
+yield $\{1,2,3\}$, $\{2,3,1\}$, $\{3,1,2\}$, $\{3,2,1\}$, $\{2,1,3\}$, and $\{1,3,2\}$,
+even though these are all the same set; that is, we get 6 different lists,
+which each represent the same set. Indeed, there are 6 such lists
+because there are three different numbers in each and $3 \cdot 1 \cdot 1 = 6$
+ways to choose them. This argument gives us our general solution. If we wish
+to choose $k$ unique elements from an $n$-element set where order does not matter,
+then we have
+\begin{equation*}
+    \binom{n}{k} = \frac{n\fallingfactorial{k}}{k!} = \frac{n!}{k!(n-k)!}.
+\end{equation*}
+The numbers $\binom{n}{k}$, read \emph{n choose k}, are called
+\emph{binomail coefficients}, for reasons you will explore in the weekly project.
+
+
+
+\end{document}
