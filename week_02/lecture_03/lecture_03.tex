@@ -1,0 +1,418 @@
+\documentclass[12pt, letterpaper]{article}
+
+\usepackage[letterpaper,left=0.7in,right=0.7in,top=\dimexpr15mm+1.5\baselineskip,bottom=0.7in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+%\usepackage{pxfonts}
+\usepackage[]{newpxtext}
+\usepackage[varg,vvarbb]{newpxmath}
+\usepackage{inconsolata}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{anyfontsize}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{propt}{Proposition}
+\newtheorem{eg}{Example}
+\newtheorem{soln}{Solution}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{prop}[1]{%
+    ~\newline
+    \begin{minipage}{\linewidth}
+    \rule{\textwidth}{2pt}
+        \begin{propt}
+}
+{%
+        \end{propt}
+    \rule{\textwidth}{2pt}
+    \end{minipage}
+}
+
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[table]{xcolor}
+
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily, % Default font
+    numbers=left,              % Location of line numbers
+    % numberstyle=\tiny,          % Style of line numbers
+    % stepnumber=2,              % Margin between line numbers
+    numbersep=5pt,              % Margin between line numbers and text
+    tabsize=2,                  % Size of tabs
+    extendedchars=true,
+    breaklines=true,            % Lines will be wrapped
+    keywordstyle=\color{red},
+    frame=b,
+    % keywordstyle=[1]\textbf,
+    % keywordstyle=[2]\textbf,
+    % keywordstyle=[3]\textbf,
+    % keywordstyle=[4]\textbf,   \sqrt{\sqrt{}}
+    stringstyle=\color{white}\ttfamily, % Color of strings
+    showspaces=false,
+    showtabs=false,
+    xleftmargin=17pt,
+    %framexbottommargin=0.2in
+    framexleftmargin=17pt,
+    framexrightmargin=5pt,
+    framexbottommargin=4pt,
+    % backgroundcolor=\color{lightgray},
+    showstringspaces=false
+}
+%\lstloadlanguages{ % Check documentation for further languages ...
+     % [Visual]Basic,
+     % Pascal,
+     % C,
+     % C++,
+     % XML,
+     % HTML,
+     %Java
+%}
+% \DeclareCaptionFont{blue}{\color{blue}} 
+
+% \captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.7, 0.7, 0.7,0.01}{\parbox{0.98\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{
+    format=listing, 
+    labelfont=white, 
+    labelformat=empty,
+    textfont=white, 
+    singlelinecheck=false, 
+    %margin=0pt, 
+    font={bf}
+    }
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancyplain}
+\fancyhf{}
+\lhead[Discrete Structures]{Discrete Structures}
+\chead[Lecture 3 Notes]{Lecture 3 Notes}
+%\rhead[\today]{\today}
+
+\newcommand{\gap}[1][0.3in]{
+    \vspace*{#1}
+    \noindent\noindent
+}
+
+\newcommand{\septext}[1][or]{
+    \qquad \text{#1} \qquad
+}
+
+\newcommand{\septextor}[0]{
+    \septext
+}
+
+\newcommand{\septextand}[0]{
+    \septext[and]
+}
+
+\newcommand{\separrow}[0]{
+    \qquad \Rightarrow \qquad
+}
+
+\newcommand{\fallingfactorial}[1]{%
+  ^{\mspace{2mu}\underline{\mspace{-2mu}#1\mspace{-2mu}}\mspace{2mu}}%
+}
+
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+%\usepgfplotslibrary{polar}
+\usepackage{wrapfig}
+\usepackage{setspace}
+\usepackage[export]{adjustbox}
+
+\usepackage{tikzsymbols}
+
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\Ima}{Im}
+
+\linespread{1.2}
+
+\definecolor{MBlue}{RGB}{0, 80, 180}
+
+\begin{document}
+\subsection*{Warm-up}
+
+\vspace*{1in}\noindent
+Consider the functions defined on the set $\{1, 2, 3, 4, 5\}$ by the rules
+\begin{equation*}
+    f(x) = x^5 - 15x^4 + 85x^3 - 224x^2 + 268x - 111
+    \qquad\text{and}\qquad
+    g(x) = x^2 - 6x + 9.
+\end{equation*}
+Write down the two sets of ordered pairs
+\begin{equation*}
+    \left\{ \left(x, f(x)\right) \;|\; x \in \{1, 2, 3, 4, 5\} \right\}
+    \qquad\text{and}\qquad
+    \left\{ \left(x, g(x)\right) \;|\; x \in \{1, 2, 3, 4, 5\} \right\}.
+\end{equation*}
+Are they the same function or different functions?
+
+\clearpage\pagebreak\noindent
+\subsection*{Relations}
+
+\vspace*{0.2in}\noindent
+Looking at the two functions defined in the warm-up,
+\begin{equation*}
+    f(x) = x^5 - 15x^4 + 85x^3 - 224x^2 + 268x - 111
+    \qquad\text{and}\qquad
+    g(x) = x^2 - 6x + 9,
+\end{equation*}
+it makes sense to think that they define different rules because $f$ and $g$
+are different. However, the two sets of ordered pairs are the same, and so
+these two functions, restricted to $\{1, 2, 3, 4, 5\}$ define the same rule!
+Today we will be talking about \emph{relations}. A \emph{relation} from a set
+$X$ to a set $Y$ is a set of ordered pairs $(x,y)$ with $x \in X$ and $y \in Y$.
+Viewed this way, a function $S \to T$ is simply a relation, $R$, from $S$ to $T$
+where every element in $S$ appears as the first element of exactly one ordered
+pair in $R$.
+
+However, there are many relations that do not define functions, so that all
+functions are relations, but not all relations are functions. Thus relations
+are more general than functions. Here are some examples.
+
+\vspace*{0.1in}\noindent
+\textbf{Example 1.}
+Define a relation, called the \emph{neighbor relation}, on the integers where
+$i$ is a neighbor of $j$ is the absolute value of their difference is 1.
+The relation has infinite cardinality, but some elements include
+\begin{equation*}
+    (-1, 0),\;(0, -1),\;(0, 1),\;(1, 0),\;(1, 2),\;(2, 1),\;(2, 3)
+\end{equation*}
+
+\vspace*{0.2in}\noindent
+\textbf{Example 2.}
+When we derived the formula for binomial coefficients, $\binom{n}{k}$, we saw
+that there were $k!$ different permutations of a $k$-element subset of an
+$n$-element set $S$. Any of these permutations is equivalent for the purposes
+of specifying the subset. We can define two permutations to be
+\emph{set-equivalent} if they are permutations of the same subset of $S$.
+This is a relation on the set of $k$-element permutations of $X$.
+
+\vspace*{0.2in}\noindent
+\textbf{Example 3.}
+If $S$ and $T$ are sets, then define a relation where the ordered pair $(S, T)$
+is an element if and only if $S$ is a subset of $T$. In this case, if $S$ and
+$T$ are related, then we usually write $S \subseteq T$.
+
+\vspace*{0.2in}\noindent
+\textbf{Example 4.}
+If $x, y \in \mathbb{R}$, then define a relation where the ordered pair $(x, y)$
+is an element if and only if $x$ is less than $y$. In this case, if $x$ and
+$y$ are related, then we usually write $x < y$.
+
+\vspace*{0.2in}
+These last examples bring up a good point. We usually write $x<y$, not
+$(x,y) \in <$, and $S \subseteq T$, not $(S,T) \in \subseteq$. Likewise, given
+a relation $R$, we commonly write $aRb$ if $(a,b) \in R$.
+
+We could define any number of properties of relations, but there are three
+(well, four) that are particularly useful, namely \emph{reflexivity},
+\emph{(anti)symmetry}, and \emph{transitivity}.
+
+\clearpage\pagebreak\noindent
+Let $R$ be a relation defined on a set $X$.
+\begin{enumerate}[label=\textbf{\alph*.}]
+    \item $R$ is \emph{reflexive} if for all $x \in X$ we have $(x,x) \in R$,
+          \emph{i.e.}, $xRx$.
+    \item $R$ is \emph{symmetric} if $(x_{1}, x_{2}) \in R$ if and only if
+          $(x_{2}, x_{1}) \in R$, \emph{i.e.}, $x_{1}Rx_{2}$ iff $x_{2}Rx_{1}$.
+          $R$ is \emph{antisymmetric} if $(x_{1}, x_{2}) \in R$ and
+          $(x_{2}, x_{1}) \in R$ only if $x_{1} = x_{2}$, \emph{i.e.},
+          $x_{1}Rx_{2}$ and $x_{2}Rx_{1}$ only if $x_{1} = x_{2}$.
+    \item $R$ is \emph{transitive} if $(a,b) \in R$ and $(b,c) \in R$ implies
+          that $(a,c) \in R$, \emph{i.e.}, $aRb$ and $bRc$ $\Rightarrow$ $aRc$.
+\end{enumerate}
+
+\vspace*{0.2in}\noindent
+\textbf{Example 5.}
+Consider the relations from Examples 1-4. Which are reflexive? Symmetric? Antisymmetric? Transitive?
+
+\iffalse
+    Set-equivalence:
+    R because a list is a permutation of itself by def,
+    S since lists are the same up to permutations,
+    T is obvious.
+
+    Neighbor:
+    ~R since every number is 0 from itself,
+    S because of absolute value,
+    ~T since that's 2
+
+    Subset:
+    R since $S \subseteq S$ for any $S$
+    A since $S \subseteq T$ and $T \subseteq S$ means $S = T$
+    T since $S \subseteq T$ and $T \subseteq U$ means $S \subset U$
+
+    Less-than:
+    ~R
+    ~S, ~A
+    T
+\fi
+
+\vspace*{0.2in}\noindent
+\textbf{Example 6.}
+Which properties does the \emph{less than or equal to} relation have?
+
+\vspace*{0.2in}\noindent
+\textbf{Example 7.}
+Analyze the relations "is a sibling of", "is the mother of", and "is a descendant of".
+
+\vspace*{0.2in}\noindent
+\textbf{Example 8.}
+Write down the set of all 3-element permutations of $\{1,2,3,4\}$ that are set-equivalent to
+\begin{multicols}{4}
+    \begin{enumerate}[label=\textbf{\alph*.}]
+        \item 123
+        \item 124
+        \item 134
+        \item 234
+    \end{enumerate}
+\end{multicols}
+Do any of these sets have any permutations in common?
+
+\vspace*{0.2in}\noindent
+Writing out the set-equivalences of each permutation gives
+
+\begin{center}
+    \begin{tabular}{l l}
+        123:\qquad & $\{ 123,\; 132,\; 213,\; 231,\; 312,\; 321 \}$ \\
+        124:\qquad & $\{ 124,\; 142,\; 214,\; 241,\; 412,\; 421 \}$ \\
+        134:\qquad & $\{ 134,\; 143,\; 314,\; 341,\; 413,\; 431 \}$ \\
+        234:\qquad & $\{ 234,\; 243,\; 324,\; 342,\; 423,\; 432 \}$
+    \end{tabular}
+\end{center}
+
+\noindent A simple examination shows that these sets are mutually disjoint.
+A careful check will also show that these sets contain every possible
+3-element permutation of $\{ 1, 2, 3, 4 \}$.
+
+\vspace*{0.2in}\noindent
+\textbf{Example 9.}
+Write down the set of all neighbors in $\mathbb{Z}$ of
+\begin{multicols}{4}
+    \begin{enumerate}[label=\textbf{\alph*.}]
+        \item 0
+        \item 1
+        \item 2
+        \item 3
+    \end{enumerate}
+\end{multicols}
+Do any of these sets have any elements in common?
+
+\vspace*{0.2in}\noindent
+\textbf{Example 10.}
+Write down all subsets of each of the following sets.
+\begin{multicols}{3}
+    \begin{enumerate}[label=\textbf{\alph*.}]
+        \item $\{ 1, 2, 3 \}$
+        \item $\{ 1, 2 \}$
+        \item $\{ 1, 3 \}$
+    \end{enumerate}
+\end{multicols}
+Do any of these sets of subsets have any elements in common?
+
+\clearpage\pagebreak\noindent
+\textbf{Example 11.}
+Write down the set of all positive integers less than
+\begin{multicols}{3}
+    \begin{enumerate}[label=\textbf{\alph*.}]
+        \item 2
+        \item 3
+        \item 4
+    \end{enumerate}
+\end{multicols}
+Do any of these sets have any elements in common?
+
+\vspace*{0.3in}
+Note that only Example 8 gives us a scenario that partitions the space (set) of
+all things (3-element permutations of $\{ 1, 2, 3, 4 \}$) into mutually disjoint
+sets. Indeed, we say that a set $P$ containing subsets of a set $S$ is a
+\emph{partition} if its elements are mutually disjoint and their union is $S$.
+In this case we call these mutually disjoint sets \emph{equivalence classes},
+or just \emph{classes}, and we say that the relation is an
+\emph{equivalence relation}. Note also that the relation in Example 8, the
+set-equivalence relation, was reflective, symmetric, and transitive. Any
+relation that has all three properties is an equivalence relation! It is easy to
+prove that these two ideas are the same, but we skip the proof here. Stated as a
+proposition, we have
+
+\begin{prop}
+    \textbf{(Equivalence Relations from Properties)}
+    Let $R$ be a relation on $S$. The following are equivalent:
+    \begin{enumerate}[label=\textbf{\alph*.}]
+        \item $R$ partitions $S$ into mutually disjoint subsets
+              ($R$ is an equivalence relation). That is, for each
+              pair of elements $x$ and $y$ of $S$, the sets
+              \begin{equation*}
+                  S_{x} = \{ z \in S \;|\; (x,z) \in R \}
+                  \qquad\text{and}\qquad
+                  S_{y} = \{ z \in S \;|\; (y,z) \in R \}
+              \end{equation*}
+              are either equal or disjoint. These sets are called \emph{equivalence classes}.
+        \item $R$ is reflexive, symmetric, and transitive.
+    \end{enumerate}
+\end{prop}
+
+\vspace*{0.1in}\noindent
+We can even go a little further. Suppose we have a set $S$ and we partition
+it. Then we can define a relation $R$ on this partition to get an equivalence
+relation.
+
+\begin{prop}
+    \textbf{(Equivalence Relations from Partitions)}
+    Let $P$ be a partition of a set $S$. Suppose we define a relation $R$ by
+    \begin{equation*}
+        R = \{ (x,y) \;|\; x \;\text{and}\; y \;\text{are in the same element of $P$} \}.
+    \end{equation*}
+    Then $R$ is an equivalence relation whose equivalence classes are the
+    elements of $P$.
+\end{prop}
+
+\clearpage\pagebreak\noindent
+Let's consider three relations, $<$, $\leq$, and $\subseteq$. We have that $<$
+is not relfexive since, \emph{e.g.}, $3 \not{<} 3$, is neither symmetric nor
+antisymmetric, but is transitive. The relations $\leq$ and $\subseteq$, on the
+other hand, are reflexive, antisymmetric, and transitive. Any such relation is
+said to be a \emph{partial order}, and a set that admits a partial order is
+called a \emph{partially ordered set} or just \emph{poset}.
+
+We use the word "partial" because there may be elements that cannot be ordered.
+For two real numbers $x$ and $y$, either $x \leq y$ or $y \leq x$ (or both, if $x=y$);
+however, if $S = \{ 1, 2 \}$ and $T = \{ 1, 3 \}$, then neither $S \subseteq T$
+nor $T \subseteq S$, even though $\subseteq$ is a partial order.
+
+Now suppose that $R$ is a partial order on $S$ and $a, b, \in S$.
+if either $aRb$ or $bRa$, then we say that $a$ and $b$ are \emph{comparable}.
+If neither is true, then they are \emph{incomparable}. If every such pair
+of elements in $S$ is comparable, then we say that $R$ is a \emph{total order}
+on $S$ and that $S$ is a \emph{totally ordered set}. Thus $\leq$ is a total
+order and $\subseteq$ is not.
+
+Sometimes, a totally ordered set has a smallest element. The set
+\begin{equation*}
+    \{ n \in \mathbb{Z} \;|\; 0 < n \}
+\end{equation*}
+is totally ordered by $\leq$ and has a smallest element, namely 0. However,
+the set
+\begin{equation*}
+    \{ x \in \mathbb{R} \;|\; 0 < x \}
+\end{equation*}
+is likewise totally ordered by $\leq$, but it has no smallest element.
+A \emph{well-ordered set} is a totally ordered set with the property that
+every non-empty subset has a smallest element. This is an important property
+with many far-reaching implications.
+
+
+
+\end{document}
